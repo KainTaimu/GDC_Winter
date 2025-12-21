@@ -1,0 +1,51 @@
+[gd_scene load_steps=9 format=3 uid="uid://d2bbcd0umajki"]
+
+[ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
+[ext_resource type="Script" uid="uid://cg86rxne1e6gv" path="res://src/Player/StateRunning.cs" id="3_70d11"]
+[ext_resource type="Script" uid="uid://8j2d8vml6hda" path="res://src/Player/PlayerMovementController.cs" id="3_mdl7e"]
+[ext_resource type="Script" uid="uid://c6osxa27rawlj" path="res://src/Player/StatController.cs" id="4_cw2d6"]
+[ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
+
+[sub_resource type="Resource" id="Resource_khinc"]
+resource_local_to_scene = true
+script = ExtResource("2_v6fml")
+MoveSpeed = 500
+metadata/_custom_type_script = "uid://bkn66m3ny3jmx"
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_70d11"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_qu4a1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Player" type="Node2D" node_paths=PackedStringArray("StatController")]
+script = ExtResource("1_p0vlq")
+StatController = NodePath("StatController")
+
+[node name="StatController" type="Node" parent="."]
+script = ExtResource("4_cw2d6")
+Stats = SubResource("Resource_khinc")
+
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
+script = ExtResource("3_mdl7e")
+_initialState = NodePath("Running")
+_states = [NodePath("Running")]
+_owner = NodePath("..")
+_sprite = NodePath("../AnimatedSprite2D")
+_statController = NodePath("../StatController")
+
+[node name="Running" type="Node" parent="MovementController" node_paths=PackedStringArray("_owner", "_statController")]
+script = ExtResource("3_70d11")
+_owner = NodePath("../..")
+_statController = NodePath("../../StatController")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_70d11")
+
+[node name="Camera2D" type="Camera2D" parent="."]

@@ -1,0 +1,13 @@
+*.uid
+*.tscn
+*.import
+*.png
+*.tres
+*.cfg
+*.xml
+*.gdbuild
+.editorconfig
+.gitattributes
+LICENSE
+assets/
+addons/
