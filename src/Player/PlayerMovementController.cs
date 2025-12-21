@@ -41,7 +41,7 @@ public partial class PlayerMovementController : Node, IStateMachine
 
     public void Start(IState initialState)
     {
-        initialState.Enter();
+        initialState?.Enter();
         _currentState = (State)initialState;
     }
 

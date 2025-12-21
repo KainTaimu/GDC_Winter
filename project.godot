@@ -67,8 +67,17 @@ move_right={
 ]
 }
 
+[layer_names]
+
+2d_physics/layer_1="ObstacleInteraction"
+2d_physics/layer_2="ObstacleCollision"
+
 [project_time_traker]
 
 sections/show_sections=true
 sections/show_graphs=true
-afk/afk_timer=300
+afk/afk_timer=180
+
+[rendering]
+
+textures/canvas_textures/default_texture_filter=0

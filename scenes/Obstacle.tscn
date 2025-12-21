@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://cc34f3sc0ndk2"]
+
+[ext_resource type="Texture2D" uid="uid://b0tt02381medl" path="res://assets/border.png" id="1_jde5u"]
+[ext_resource type="Script" uid="uid://brllsqfwl1bwu" path="res://src/Obstacles/Obstacle.cs" id="1_qf6v3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sdg2s"]
+size = Vector2(119.865, 90)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jde5u"]
+size = Vector2(60, 60)
+
+[node name="Obstacle" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_qf6v3")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -30.240002)
+scale = Vector2(3.7199998, 3.7199998)
+texture = ExtResource("1_jde5u")
+
+[node name="InteractionArea" type="Area2D" parent="."]
+position = Vector2(0, -30.240002)
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_sdg2s")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+position = Vector2(0, -30.240002)
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+shape = SubResource("RectangleShape2D_jde5u")
+debug_color = Color(0.9607843, 0, 0, 0.41960785)

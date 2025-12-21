@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=10 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
@@ -6,6 +6,9 @@
 [ext_resource type="Script" uid="uid://8j2d8vml6hda" path="res://src/Player/PlayerMovementController.cs" id="3_mdl7e"]
 [ext_resource type="Script" uid="uid://c6osxa27rawlj" path="res://src/Player/StatController.cs" id="4_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
+size = Vector2(250, 250)
 
 [sub_resource type="Resource" id="Resource_khinc"]
 resource_local_to_scene = true
@@ -25,16 +28,24 @@ animations = [{
 }]
 
 [node name="Player" type="Node2D" node_paths=PackedStringArray("StatController")]
+scale = Vector2(0.75, 0.75)
 script = ExtResource("1_p0vlq")
 StatController = NodePath("StatController")
+
+[node name="ParkourArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ParkourArea"]
+position = Vector2(2, 2.6666718)
+shape = SubResource("RectangleShape2D_70d11")
 
 [node name="StatController" type="Node" parent="."]
 script = ExtResource("4_cw2d6")
 Stats = SubResource("Resource_khinc")
 
-[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")
-_initialState = NodePath("Running")
 _states = [NodePath("Running")]
 _owner = NodePath("..")
 _sprite = NodePath("../AnimatedSprite2D")
@@ -49,3 +60,36 @@ _statController = NodePath("../../StatController")
 sprite_frames = SubResource("SpriteFrames_70d11")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -20.0
+offset_top = -108.0
+offset_right = 20.0
+offset_bottom = -68.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -19.0
+offset_top = -23.0
+offset_right = 19.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 2
+
+[node name="Label" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Position"
+horizontal_alignment = 1
