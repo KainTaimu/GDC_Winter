@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dnfppai1wbb4"]
+
+[ext_resource type="PackedScene" uid="uid://cc34f3sc0ndk2" path="res://scenes/Obstacle.tscn" id="1_lxscg"]
+[ext_resource type="Script" uid="uid://bl4toncjgan67" path="res://src/Obstacles/ObstacleCrate.cs" id="2_btm72"]
+
+[node name="ObstacleTurret" instance=ExtResource("1_lxscg")]
+script = ExtResource("2_btm72")
+Type = 1
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(0, 32)
+
+[node name="InteractionArea" parent="." index="1"]
+position = Vector2(0, 60)
+
+[node name="CollisionArea" parent="." index="2"]
+position = Vector2(0, 34)

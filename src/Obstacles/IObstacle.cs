@@ -6,5 +6,5 @@ public interface IObstacle
     /// Resets this obstacle's state
     /// </summary>
     void Enter();
-    void Exit();
+    void Exit(Area2D area);
 }

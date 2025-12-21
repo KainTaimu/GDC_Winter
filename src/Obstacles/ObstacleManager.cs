@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 
 namespace Game.Obstacles;
 
@@ -27,33 +26,38 @@ public partial class ObstacleManager : Node
     private Node2D _roofSpawnPoint;
 
     private readonly List<Obstacle> _obstacles = [];
-    private Timer _spawnTimer = new();
+    private readonly Queue<Obstacle> _onObstacles = [];
+    private readonly Queue<Obstacle> _offObstacles = [];
+
+    private Timer _spawnTimer = new() { Autostart = true };
 
     public override void _Ready()
     {
         PopulatePool();
 
         var time = GD.RandRange(_spawnTimeMin, _spawnTimeMax);
-        _spawnTimer.Autostart = true;
+        AddChild(_spawnTimer);
         _spawnTimer.Start(time);
         _spawnTimer.Timeout += SpawnObstacle;
     }
 
     public override void _Process(double delta)
     {
-        base._Process(delta);
+        if (Engine.GetProcessFrames() % 10 == 0)
+        {
+            Logger.LogDebug($"On", string.Join(", ", _onObstacles));
+            Logger.LogDebug($"Off", string.Join(", ", _offObstacles));
+        }
     }
 
     public void SpawnObstacle()
     {
-        var obstacle = _obstacles[GD.RandRange(0, _obstacleTypes.Count - 1)];
-        obstacle.Enter();
-    }
+        if (!_offObstacles.TryDequeue(out var obstacle))
+            return;
 
-    public void SpawnObstacle<T>()
-        where T : IObstacle
-    {
-        var obstacle = _obstacles.OfType<T>().First();
+        _onObstacles.Enqueue(obstacle);
+
+        obstacle.ProcessMode = ProcessModeEnum.Inherit;
         obstacle.Enter();
     }
 
@@ -74,7 +78,38 @@ public partial class ObstacleManager : Node
                         break;
                 }
 
+                obstacle.OnExit += () =>
+                {
+                    // Can't disable without deferring
+                    Callable
+                        .From(() =>
+                        {
+                            obstacle.ProcessMode = ProcessModeEnum.Disabled;
+                        })
+                        .CallDeferred();
+                    switch (obstacle.Type)
+                    {
+                        case ObstacleType.Ground:
+                            obstacle.Position = _groundSpawnPoint.Position;
+                            break;
+                        case ObstacleType.Roof:
+                            obstacle.Position = _roofSpawnPoint.Position;
+                            break;
+                    }
+                    _onObstacles.Dequeue();
+                    _offObstacles.Enqueue(obstacle);
+                };
+
+                obstacle.Name = obstacle.Name + " " + i;
+                Callable
+                    .From(() =>
+                    {
+                        obstacle.ProcessMode = ProcessModeEnum.Disabled;
+                    })
+                    .CallDeferred();
+
                 _obstacles.Add(obstacle);
+                _offObstacles.Enqueue(obstacle);
                 AddChild(obstacle);
             }
         }

@@ -19,6 +19,7 @@ config/icon="res://icon.svg"
 
 BuildInfo="*res://scenes/BuildInfo.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+Game="*res://src/Game.cs"
 
 [display]
 
@@ -39,6 +40,13 @@ project/assembly_name="GDC_Winter"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/project-time-tracker/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://addons/": "gray",
+"res://dev/": "gray"
+}
 
 [input]
 
@@ -71,6 +79,9 @@ move_right={
 
 2d_physics/layer_1="ObstacleInteraction"
 2d_physics/layer_2="ObstacleCollision"
+2d_physics/layer_3="ObstacleExitArea"
+2d_physics/layer_9="PlayerParkourArea"
+2d_physics/layer_10="PlayerCollisionArea"
 
 [project_time_traker]
 
