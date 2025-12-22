@@ -6,7 +6,7 @@
 [ext_resource type="Script" uid="uid://dxxvd2jfic8e5" path="res://src/Player/CollisionArea.cs" id="4_nhv7q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdg2s"]
-size = Vector2(176, 64)
+size = Vector2(176, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jde5u"]
 size = Vector2(64, 64)

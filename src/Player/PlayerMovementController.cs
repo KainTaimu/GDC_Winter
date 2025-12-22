@@ -5,6 +5,9 @@ namespace Game.Player;
 
 public partial class PlayerMovementController : Node, IStateMachine
 {
+    [Signal]
+    public delegate void OnStateChangeEventHandler(State newState);
+
     [ExportGroup("States")]
     [Export]
     private State _initialState;
@@ -61,14 +64,13 @@ public partial class PlayerMovementController : Node, IStateMachine
         CurrentState?.PhysicsProcess(delta);
     }
 
-    /// <summary>
-    /// Forcibly change state without calling transition
-    /// </summary>
     public void ChangeState(IState newState)
     {
         Logger.LogDebug("Changing state", newState.ToString());
+        CurrentState.Exit();
         newState.Enter();
         CurrentState = (State)newState;
+        EmitSignal(SignalName.OnStateChange, (State)newState);
     }
 
     public void ChangeState<T>()

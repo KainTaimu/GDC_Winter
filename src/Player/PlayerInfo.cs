@@ -8,8 +8,13 @@ public partial class PlayerInfo : Control
 	[Export]
 	private Label _currentState;
 
-	public override void _Process(double delta)
+	public override void _Ready()
 	{
-		_currentState.Text = $"CurrentState: {_movementController.CurrentState.Name}";
+		_movementController.OnStateChange += UpdateLabel;
+	}
+
+	private void UpdateLabel(State newState)
+	{
+		_currentState.Text = $"CurrentState: {newState.Name}";
 	}
 }

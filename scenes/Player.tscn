@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=14 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://c6osxa27rawlj" path="res://src/Player/StatController.cs" id="4_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
 [ext_resource type="Script" uid="uid://cr6l3ncxh2b2k" path="res://src/Player/StateJumpingOverBox.cs" id="6_khinc"]
+[ext_resource type="Script" uid="uid://dy0jkt7feu81" path="res://src/Player/StateCollidedWithBox.cs" id="7_bruh7"]
 [ext_resource type="Script" uid="uid://bavoprfy5bdby" path="res://src/Player/PlayerInfo.cs" id="7_cw2d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
@@ -60,7 +61,7 @@ Stats = SubResource("Resource_khinc")
 [node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")
 _initialState = NodePath("Grounded")
-_states = [NodePath("Grounded"), NodePath("JumpingOverBox")]
+_states = [NodePath("Grounded"), NodePath("JumpingOverBox"), NodePath("CollidedWithBox")]
 _owner = NodePath("..")
 _sprite = NodePath("../AnimatedSprite2D")
 _statController = NodePath("../StatController")
@@ -73,9 +74,15 @@ _interactionArea = NodePath("../../InteractionArea")
 _collisionArea = NodePath("../../CollisionArea")
 MovementController = NodePath("..")
 
-[node name="JumpingOverBox" type="Node" parent="MovementController" node_paths=PackedStringArray("_interactionArea", "MovementController")]
+[node name="JumpingOverBox" type="Node" parent="MovementController" node_paths=PackedStringArray("_player", "_interactionArea", "MovementController")]
 script = ExtResource("6_khinc")
+_player = NodePath("../..")
 _interactionArea = NodePath("../../InteractionArea")
+MovementController = NodePath("..")
+
+[node name="CollidedWithBox" type="Node" parent="MovementController" node_paths=PackedStringArray("_collisionArea", "MovementController")]
+script = ExtResource("7_bruh7")
+_collisionArea = NodePath("../../CollisionArea")
 MovementController = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
