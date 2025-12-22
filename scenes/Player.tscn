@@ -81,16 +81,17 @@ _player = NodePath("../..")
 _interactionArea = NodePath("../../InteractionArea")
 MovementController = NodePath("..")
 
-[node name="CollidedWithBox" type="Node" parent="MovementController" node_paths=PackedStringArray("_collisionArea", "MovementController")]
+[node name="CollidedWithBox" type="Node" parent="MovementController" node_paths=PackedStringArray("_collisionArea", "_statController", "MovementController")]
 script = ExtResource("7_bruh7")
 _collisionArea = NodePath("../../CollisionArea")
+_statController = NodePath("../../StatController")
 MovementController = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_70d11")
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_movementController", "_currentState")]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_movementController", "_statController", "_health", "_currentState")]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -105,7 +106,9 @@ grow_horizontal = 2
 grow_vertical = 0
 script = ExtResource("7_cw2d6")
 _movementController = NodePath("../MovementController")
-_currentState = NodePath("VBoxContainer/Label")
+_statController = NodePath("../StatController")
+_health = NodePath("VBoxContainer/Health")
+_currentState = NodePath("VBoxContainer/CurrentState")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -121,7 +124,12 @@ grow_horizontal = 2
 grow_vertical = 0
 alignment = 2
 
-[node name="Label" type="Label" parent="Control/VBoxContainer"]
+[node name="Health" type="Label" parent="Control/VBoxContainer"]
+layout_mode = 2
+text = "Health: "
+horizontal_alignment = 1
+
+[node name="CurrentState" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
 text = "CurrentState: "
 horizontal_alignment = 1
