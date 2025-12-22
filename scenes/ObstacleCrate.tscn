@@ -11,7 +11,7 @@ Top = NodePath("Top")
 Obstacle = NodePath("..")
 
 [node name="CollisionShape2D" parent="InteractionArea" index="0"]
-position = Vector2(-40, -4)
+position = Vector2(0, -4)
 
 [node name="CollisionArea" parent="." index="2" node_paths=PackedStringArray("Obstacle")]
 Obstacle = NodePath("..")

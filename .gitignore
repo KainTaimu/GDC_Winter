@@ -5,3 +5,5 @@ dev
 project_time_traker.json
 GDC_Winter.sln.DotSettings.user
 .idea/
+exports/
+.stfolder/
