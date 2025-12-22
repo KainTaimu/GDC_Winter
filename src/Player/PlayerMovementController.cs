@@ -66,7 +66,20 @@ public partial class PlayerMovementController : Node, IStateMachine
     /// </summary>
     public void ChangeState(IState newState)
     {
+        Logger.LogDebug("Changing state", newState.ToString());
         newState.Enter();
         CurrentState = (State)newState;
+    }
+
+    public void ChangeState<T>()
+        where T : State
+    {
+        var newState = _states.OfType<T>().FirstOrDefault() ?? null;
+        if (newState is null)
+        {
+            Logger.LogError("Changing state with state type failed. State not found");
+            return;
+        }
+        ChangeState(newState);
     }
 }

@@ -1,18 +1,16 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7r6okn8p8ni4"]
+[gd_scene load_steps=3 format=3 uid="uid://c7r6okn8p8ni4"]
 
 [ext_resource type="PackedScene" uid="uid://cc34f3sc0ndk2" path="res://scenes/Obstacle.tscn" id="1_uh5n2"]
 [ext_resource type="Script" uid="uid://bl4toncjgan67" path="res://src/Obstacles/ObstacleCrate.cs" id="2_7u0lo"]
-[ext_resource type="Script" uid="uid://c1hi35j2oyplq" path="res://src/Player/InteractionArea.cs" id="3_ebpuq"]
-[ext_resource type="Script" uid="uid://dxxvd2jfic8e5" path="res://src/Player/CollisionArea.cs" id="4_kag1p"]
 
 [node name="ObstacleCrate" instance=ExtResource("1_uh5n2")]
 script = ExtResource("2_7u0lo")
 
-[node name="InteractionArea" parent="." index="1"]
-script = ExtResource("3_ebpuq")
+[node name="InteractionArea" parent="." index="1" node_paths=PackedStringArray("Obstacle")]
+Obstacle = NodePath("..")
 
 [node name="CollisionShape2D" parent="InteractionArea" index="0"]
-position = Vector2(-48, -2)
+position = Vector2(-40, -2)
 
-[node name="CollisionArea" parent="." index="2"]
-script = ExtResource("4_kag1p")
+[node name="CollisionArea" parent="." index="2" node_paths=PackedStringArray("Obstacle")]
+Obstacle = NodePath("..")

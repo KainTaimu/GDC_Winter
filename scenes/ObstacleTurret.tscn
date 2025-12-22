@@ -10,8 +10,14 @@ Type = 1
 [node name="Sprite2D" parent="." index="0"]
 position = Vector2(0, 32)
 
-[node name="InteractionArea" parent="." index="1"]
+[node name="InteractionArea" parent="." index="1" node_paths=PackedStringArray("Obstacle")]
+process_mode = 4
 position = Vector2(0, 60)
+Obstacle = NodePath("..")
 
-[node name="CollisionArea" parent="." index="2"]
+[node name="CollisionShape2D" parent="InteractionArea" index="0"]
+position = Vector2(0, -28)
+
+[node name="CollisionArea" parent="." index="2" node_paths=PackedStringArray("Obstacle")]
 position = Vector2(0, 34)
+Obstacle = NodePath("..")

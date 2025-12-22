@@ -14,4 +14,9 @@ public partial class State : Node, IState
     public virtual void Process(double delta) { }
 
     public void PhysicsProcess(double delta) { }
+
+    public override string ToString()
+    {
+        return $"{Name}";
+    }
 }

@@ -73,8 +73,10 @@ _interactionArea = NodePath("../../InteractionArea")
 _collisionArea = NodePath("../../CollisionArea")
 MovementController = NodePath("..")
 
-[node name="JumpingOverBox" type="Node" parent="MovementController"]
+[node name="JumpingOverBox" type="Node" parent="MovementController" node_paths=PackedStringArray("_interactionArea", "MovementController")]
 script = ExtResource("6_khinc")
+_interactionArea = NodePath("../../InteractionArea")
+MovementController = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
