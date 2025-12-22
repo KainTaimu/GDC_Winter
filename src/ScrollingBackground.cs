@@ -5,7 +5,7 @@ public partial class ScrollingBackground : Node2D
 	[Export]
 	private bool _enabled = true;
 
-	public static int ScrollSpeed { get; private set; } = 400;
+	public static int ScrollSpeed { get; private set; } = 500;
 
 	// TODO: Currently unnecessary
 	[ExportCategory("Components")]

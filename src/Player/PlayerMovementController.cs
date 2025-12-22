@@ -1,3 +1,4 @@
+using System.Linq;
 using Godot.Collections;
 
 namespace Game.Player;
@@ -11,7 +12,7 @@ public partial class PlayerMovementController : Node, IStateMachine
     [Export]
     private Array<State> _states = [];
 
-    private State _currentState;
+    public State CurrentState { get; private set; }
 
     [ExportGroup("Components")]
     [Export]
@@ -42,7 +43,7 @@ public partial class PlayerMovementController : Node, IStateMachine
     public void Start(IState initialState)
     {
         initialState?.Enter();
-        _currentState = (State)initialState;
+        CurrentState = (State)initialState;
     }
 
     public void Stop()
@@ -52,21 +53,20 @@ public partial class PlayerMovementController : Node, IStateMachine
 
     public void Update(double delta)
     {
-        _currentState?.Process(delta);
+        CurrentState?.Process(delta);
     }
 
     public void PhysicsUpdate(double delta)
     {
-        _currentState?.PhysicsProcess(delta);
+        CurrentState?.PhysicsProcess(delta);
     }
 
+    /// <summary>
+    /// Forcibly change state without calling transition
+    /// </summary>
     public void ChangeState(IState newState)
     {
-        throw new NotImplementedException();
-    }
-
-    public void TransitionState(IState newState)
-    {
-        throw new NotImplementedException();
+        newState.Enter();
+        CurrentState = (State)newState;
     }
 }

@@ -1,12 +1,15 @@
+using Game.Player;
+
 namespace Game;
 
 public partial class State : Node, IState
 {
+    [Export]
+    protected PlayerMovementController MovementController { get; private set; }
+
     public virtual void Enter() { }
 
     public virtual void Exit() { }
-
-    public virtual void Transition(IState previousState) { }
 
     public virtual void Process(double delta) { }
 

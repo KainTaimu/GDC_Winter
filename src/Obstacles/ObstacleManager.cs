@@ -43,11 +43,12 @@ public partial class ObstacleManager : Node
 
     public override void _Process(double delta)
     {
-        if (Engine.GetProcessFrames() % 10 == 0)
-        {
-            Logger.LogDebug($"On", string.Join(", ", _onObstacles));
-            Logger.LogDebug($"Off", string.Join(", ", _offObstacles));
-        }
+        // if (Engine.GetProcessFrames() % 10 == 0)
+        // {
+        //     Logger.LogDebug($"On", string.Join(", ", _onObstacles));
+        //     Logger.LogDebug($"Off", string.Join(", ", _offObstacles));
+        //     Logger.LogDebug(_spawnTimer.WaitTime);
+        // }
     }
 
     public void SpawnObstacle()
@@ -59,6 +60,8 @@ public partial class ObstacleManager : Node
 
         obstacle.ProcessMode = ProcessModeEnum.Inherit;
         obstacle.Enter();
+
+        _spawnTimer.WaitTime = GD.RandRange(_spawnTimeMin, _spawnTimeMax);
     }
 
     private void PopulatePool()

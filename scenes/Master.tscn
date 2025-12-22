@@ -329,14 +329,18 @@ tile_set = SubResource("TileSet_keclr")
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
-ExtResource("4_a3ru1"): 1,
-ExtResource("5_hlhxn"): 1
+ExtResource("4_a3ru1"): 2,
+ExtResource("5_hlhxn"): 3
 })
 _spawnTimeMin = 1.0
+_spawnTimeMax = 5.0
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")
 _roofSpawnPoint = NodePath("../Dev/RoofMarker")
 
 [node name="Player" parent="." instance=ExtResource("2_6sk48")]
+position = Vector2(640, 933)
+
+[node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
 
 [node name="Dev" type="Node" parent="."]

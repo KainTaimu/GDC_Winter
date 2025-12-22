@@ -4,5 +4,4 @@ public interface IState
     void Exit();
     void Process(double delta);
     void PhysicsProcess(double delta);
-    void Transition(IState previousState);
 }

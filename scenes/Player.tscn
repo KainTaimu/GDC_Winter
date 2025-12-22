@@ -1,14 +1,16 @@
-[gd_scene load_steps=11 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=13 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
-[ext_resource type="Script" uid="uid://cg86rxne1e6gv" path="res://src/Player/StateRunning.cs" id="3_70d11"]
+[ext_resource type="Script" uid="uid://cg86rxne1e6gv" path="res://src/Player/StateGrounded.cs" id="3_70d11"]
 [ext_resource type="Script" uid="uid://8j2d8vml6hda" path="res://src/Player/PlayerMovementController.cs" id="3_mdl7e"]
 [ext_resource type="Script" uid="uid://c6osxa27rawlj" path="res://src/Player/StatController.cs" id="4_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
+[ext_resource type="Script" uid="uid://cr6l3ncxh2b2k" path="res://src/Player/StateJumpingOverBox.cs" id="6_khinc"]
+[ext_resource type="Script" uid="uid://bavoprfy5bdby" path="res://src/Player/PlayerInfo.cs" id="7_cw2d6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
-size = Vector2(266.043, 137.333)
+size = Vector2(234.66666, 127.999825)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cw2d6"]
 size = Vector2(128, 128)
@@ -16,7 +18,6 @@ size = Vector2(128, 128)
 [sub_resource type="Resource" id="Resource_khinc"]
 resource_local_to_scene = true
 script = ExtResource("2_v6fml")
-MoveSpeed = 500
 metadata/_custom_type_script = "uid://bkn66m3ny3jmx"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_70d11"]
@@ -35,19 +36,18 @@ scale = Vector2(0.75, 0.75)
 script = ExtResource("1_p0vlq")
 StatController = NodePath("StatController")
 
-[node name="ParkourArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="."]
 position = Vector2(0, -64)
 collision_layer = 256
-collision_mask = 0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ParkourArea"]
-position = Vector2(3.8146973e-06, -4.6666718)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+position = Vector2(53.333336, -9.1552734e-05)
 shape = SubResource("RectangleShape2D_70d11")
 
 [node name="CollisionArea" type="Area2D" parent="."]
-position = Vector2(0, -64)
+position = Vector2(0, -61.333336)
 collision_layer = 512
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 shape = SubResource("RectangleShape2D_cw2d6")
@@ -57,25 +57,30 @@ debug_color = Color(0.9607843, 0, 0, 0.41960785)
 script = ExtResource("4_cw2d6")
 Stats = SubResource("Resource_khinc")
 
-[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_states", "_owner", "_sprite", "_statController")]
+[node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")
-_states = [NodePath("Running")]
+_initialState = NodePath("Grounded")
+_states = [NodePath("Grounded"), NodePath("JumpingOverBox")]
 _owner = NodePath("..")
 _sprite = NodePath("../AnimatedSprite2D")
 _statController = NodePath("../StatController")
 
-[node name="Running" type="Node" parent="MovementController" node_paths=PackedStringArray("_owner", "_statController")]
+[node name="Grounded" type="Node" parent="MovementController" node_paths=PackedStringArray("_owner", "_statController", "_interactionArea", "_collisionArea", "MovementController")]
 script = ExtResource("3_70d11")
 _owner = NodePath("../..")
 _statController = NodePath("../../StatController")
+_interactionArea = NodePath("../../InteractionArea")
+_collisionArea = NodePath("../../CollisionArea")
+MovementController = NodePath("..")
+
+[node name="JumpingOverBox" type="Node" parent="MovementController"]
+script = ExtResource("6_khinc")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_70d11")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-
-[node name="Control" type="Control" parent="."]
+[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_movementController", "_currentState")]
 layout_mode = 3
 anchors_preset = 7
 anchor_left = 0.5
@@ -88,6 +93,9 @@ offset_right = 20.0
 offset_bottom = -137.33334
 grow_horizontal = 2
 grow_vertical = 0
+script = ExtResource("7_cw2d6")
+_movementController = NodePath("../MovementController")
+_currentState = NodePath("VBoxContainer/Label")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 1
@@ -105,5 +113,5 @@ alignment = 2
 
 [node name="Label" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2
-text = "Position"
+text = "CurrentState: "
 horizontal_alignment = 1

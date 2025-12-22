@@ -12,7 +12,6 @@ public partial class Obstacle : Node2D, IObstacle
 
 	public virtual void Exit(Area2D area)
 	{
-		Logger.LogDebug("EXIT", area.Name);
 		EmitSignal(SignalName.OnExit);
 	}
 
