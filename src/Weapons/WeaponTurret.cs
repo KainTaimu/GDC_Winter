@@ -33,6 +33,7 @@ public partial class WeaponTurret : Weapon
         projectile.SetPosition(Position);
         projectile.SetRotation(GetAngleFromPlayer());
         projectile.ProjectileSpeed = -Stats.ProjectileSpeed; // BUG: Shoots backwards if not negative
+        projectile.TargetsWhat = ProjectileTargetsWhat.Player;
         AddChild(projectile);
     }
 

@@ -8,7 +8,6 @@ public partial class Projectile : Area2D
     [Signal]
     public delegate void OnEntityHitEventHandler(Node2D target);
 
-    [Export]
     public ProjectileTargetsWhat TargetsWhat = ProjectileTargetsWhat.Player;
 
     private Weapon _origin;

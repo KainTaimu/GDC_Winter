@@ -337,7 +337,7 @@ metadata/_edit_lock_ = true
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
 ExtResource("5_hlhxn"): 1,
-ExtResource("6_ynw6u"): 4
+ExtResource("6_ynw6u"): 0
 })
 _spawnTimeMin = 1.0
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")
