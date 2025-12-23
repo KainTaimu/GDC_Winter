@@ -9,6 +9,9 @@ public partial class StatController : Node
     [Export]
     private PlayerMovementController _movementController;
 
+    [Export]
+    private AnimatedSprite2D _sprite;
+
     public override void _Ready()
     {
         Stats.Initialize();
@@ -29,5 +32,36 @@ public partial class StatController : Node
         {
             Stats.Health -= damage;
         }
+        DamageFeedback();
+    }
+
+    private void DamageFeedback()
+    {
+        if (_sprite.Material is not ShaderMaterial spriteShaderMaterial)
+        {
+            return;
+        }
+
+        var tween = CreateTween();
+        tween?.Kill();
+        tween = CreateTween()
+            .BindNode(this)
+            .SetTrans(Tween.TransitionType.Expo)
+            .SetEase(Tween.EaseType.Out);
+
+        spriteShaderMaterial.SetShaderParameter("flash_state", 1f);
+        spriteShaderMaterial.SetShaderParameter("color", new Color("white"));
+
+        tween.TweenMethod(
+            Callable.From(
+                (float i) =>
+                {
+                    spriteShaderMaterial.SetShaderParameter("flash_state", i);
+                }
+            ),
+            1f,
+            0f,
+            1f
+        );
     }
 }

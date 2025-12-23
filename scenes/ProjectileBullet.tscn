@@ -9,3 +9,7 @@ script = ExtResource("2_5nfhu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
 texture = ExtResource("3_xcd42")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="2"]
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="OnExitScreen"]

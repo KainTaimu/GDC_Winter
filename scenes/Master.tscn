@@ -336,8 +336,8 @@ metadata/_edit_lock_ = true
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
-ExtResource("5_hlhxn"): 4,
-ExtResource("6_ynw6u"): 3
+ExtResource("5_hlhxn"): 1,
+ExtResource("6_ynw6u"): 4
 })
 _spawnTimeMin = 1.0
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")
@@ -362,11 +362,11 @@ metadata/_edit_lock_ = true
 shape = SubResource("RectangleShape2D_wjax6")
 
 [node name="GroundMarker" type="Marker2D" parent="Dev"]
-position = Vector2(2400, 933)
+position = Vector2(2110, 933)
 gizmo_extents = 30.0
 metadata/_edit_lock_ = true
 
 [node name="RoofMarker" type="Marker2D" parent="Dev"]
-position = Vector2(2400, 147)
+position = Vector2(2110, 147)
 gizmo_extents = 30.0
 metadata/_edit_lock_ = true

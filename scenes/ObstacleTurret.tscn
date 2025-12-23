@@ -47,3 +47,6 @@ Stats = SubResource("Resource_wr0kc")
 position = Vector2(0, 64)
 
 [node name="Timer" type="Timer" parent="WeaponTurret" index="1"]
+
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="WeaponTurret" index="2"]
+rect = Rect2(-36, -36, 72, 72)

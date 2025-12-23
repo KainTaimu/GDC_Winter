@@ -15,4 +15,9 @@ public partial class ProjectileBullet : Projectile
 
         Position += moveVector;
     }
+
+    private void OnExitScreen()
+    {
+        QueueFree();
+    }
 }

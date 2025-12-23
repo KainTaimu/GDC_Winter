@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=19 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bgc137qeeq2w3" path="res://src/Player/PlayerInteractionArea.cs" id="2_o4126"]
@@ -12,6 +12,7 @@
 [ext_resource type="Script" uid="uid://dy0jkt7feu81" path="res://src/Player/StateCollidedWithBox.cs" id="7_bruh7"]
 [ext_resource type="Script" uid="uid://bavoprfy5bdby" path="res://src/Player/PlayerInfo.cs" id="7_cw2d6"]
 [ext_resource type="Script" uid="uid://b772txwbwooi6" path="res://src/Player/StateDying.cs" id="8_6eyey"]
+[ext_resource type="Shader" uid="uid://bbwua2g02t0jl" path="res://src/Shaders/flash.gdshader" id="11_lkdrv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
 size = Vector2(320, 127.999825)
@@ -23,6 +24,12 @@ size = Vector2(128, 128)
 resource_local_to_scene = true
 script = ExtResource("2_v6fml")
 metadata/_custom_type_script = "uid://bkn66m3ny3jmx"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p7iby"]
+resource_local_to_scene = true
+shader = ExtResource("11_lkdrv")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/flash_state = 0.0
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_70d11"]
 animations = [{
@@ -62,10 +69,11 @@ position = Vector2(0, -2.6666603)
 shape = SubResource("RectangleShape2D_cw2d6")
 debug_color = Color(0.9607843, 0, 0, 0.41960785)
 
-[node name="StatController" type="Node" parent="." node_paths=PackedStringArray("_movementController")]
+[node name="StatController" type="Node" parent="." node_paths=PackedStringArray("_movementController", "_sprite")]
 script = ExtResource("4_cw2d6")
 Stats = SubResource("Resource_khinc")
 _movementController = NodePath("../MovementController")
+_sprite = NodePath("../AnimatedSprite2D")
 
 [node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")
@@ -100,6 +108,7 @@ script = ExtResource("8_6eyey")
 MovementController = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+material = SubResource("ShaderMaterial_p7iby")
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_70d11")
 
