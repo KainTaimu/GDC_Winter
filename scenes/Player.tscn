@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=15 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cr6l3ncxh2b2k" path="res://src/Player/StateJumpingOverBox.cs" id="6_khinc"]
 [ext_resource type="Script" uid="uid://dy0jkt7feu81" path="res://src/Player/StateCollidedWithBox.cs" id="7_bruh7"]
 [ext_resource type="Script" uid="uid://bavoprfy5bdby" path="res://src/Player/PlayerInfo.cs" id="7_cw2d6"]
+[ext_resource type="Script" uid="uid://b772txwbwooi6" path="res://src/Player/StateDying.cs" id="8_6eyey"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
 size = Vector2(320, 127.999825)
@@ -62,7 +63,7 @@ Stats = SubResource("Resource_khinc")
 [node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")
 _initialState = NodePath("Grounded")
-_states = [NodePath("Grounded"), NodePath("JumpingOverBox"), NodePath("CollidedWithBox")]
+_states = [NodePath("Grounded"), NodePath("JumpingOverBox"), NodePath("CollidedWithBox"), NodePath("Dying")]
 _owner = NodePath("..")
 _sprite = NodePath("../AnimatedSprite2D")
 _statController = NodePath("../StatController")
@@ -85,6 +86,10 @@ MovementController = NodePath("..")
 script = ExtResource("7_bruh7")
 _collisionArea = NodePath("../../CollisionArea")
 _statController = NodePath("../../StatController")
+MovementController = NodePath("..")
+
+[node name="Dying" type="Node" parent="MovementController" node_paths=PackedStringArray("MovementController")]
+script = ExtResource("8_6eyey")
 MovementController = NodePath("..")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]

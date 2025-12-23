@@ -5,6 +5,9 @@ public partial class GameWorld : Node
     [Signal]
     public delegate void OnLevelChangeEventHandler(Level newLevel);
 
+    [Signal]
+    public delegate void OnPlayerDeathEventHandler();
+
     public static GameWorld Instance;
 
     public GameWorld()

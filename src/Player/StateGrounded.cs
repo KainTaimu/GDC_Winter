@@ -29,8 +29,6 @@ public partial class StateGrounded : State
         _collisionArea.AreaEntered -= OnObstacleCollision;
     }
 
-    public override void _Ready() { }
-
     public override void Process(double delta)
     {
         if (!Input.IsActionJustPressed(InputMapNames.MoveUp))
@@ -50,7 +48,7 @@ public partial class StateGrounded : State
                 MovementController.ChangeState<StateJumpingOverBox>();
                 break;
             default:
-                Logger.LogDebug(interactionArea.Obstacle.ToString());
+                Logger.LogDebug("Unhandled interaction:", interactionArea.Obstacle.ToString());
                 break;
         }
     }

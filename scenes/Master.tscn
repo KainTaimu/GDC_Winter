@@ -286,9 +286,10 @@ sources/0 = SubResource("TileSetAtlasSource_6sk48")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wjax6"]
 size = Vector2(300, 786)
 
-[node name="Master" type="Node" node_paths=PackedStringArray("GroundMarker")]
+[node name="Master" type="Node" node_paths=PackedStringArray("GroundMarker", "ScrollingBackground")]
 script = ExtResource("1_hlhxn")
 GroundMarker = NodePath("Dev/GroundMarker")
+ScrollingBackground = NodePath("ScrollingBg")
 
 [node name="CinematicBars" type="CanvasLayer" parent="."]
 

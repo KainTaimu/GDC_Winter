@@ -11,14 +11,19 @@ public partial class StateCollidedWithBox : State
     public override void Enter()
     {
         _statController.Stats.Health -= 1;
+        if (_statController.Stats.Health <= 0)
+        {
+            MovementController.ChangeState<StateDying>();
+        }
+        else
+        {
+            // _collisionArea.AreaExited += AfterCollisionWithBox;
+        }
     }
 
     public override void Exit() { }
 
-    public override void _Ready()
-    {
-        _collisionArea.AreaExited += AfterCollisionWithBox;
-    }
+    public override void _Ready() { }
 
     private void AfterCollisionWithBox(Area2D area)
     {

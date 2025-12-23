@@ -27,6 +27,9 @@ public partial class PlayerMovementController : Node, IStateMachine
     [Export]
     private StatController _statController;
 
+    private bool _isLocked;
+    private object _lockedBy;
+
     public override void _Ready()
     {
         _sprite.Play();
@@ -66,20 +69,72 @@ public partial class PlayerMovementController : Node, IStateMachine
 
     public void ChangeState(IState newState)
     {
-        CurrentState.Exit();
-        newState.Enter();
+        if (_isLocked)
+        {
+            Logger.LogWarning(
+                $"Failed to change state to {newState.GetType().Name}. Locked by {_lockedBy.GetType().Name}"
+            );
+            return;
+        }
+
+        var old = CurrentState;
         CurrentState = (State)newState;
-        EmitSignal(SignalName.OnStateChange, (State)newState);
+        old.Exit();
+        CurrentState.Enter();
+        EmitSignal(SignalName.OnStateChange, CurrentState);
     }
 
     public void ChangeState<T>()
         where T : State
     {
         var newState = _states.OfType<T>().FirstOrDefault() ?? null;
+        if (newState is null)
+        {
+            Logger.LogError("Changing state with state type failed. State not found");
+            return;
+        }
 
-        CurrentState.Exit();
-        newState.Enter();
+        if (_isLocked)
+        {
+            Logger.LogWarning(
+                $"Failed to change state to {newState.Name}. Locked by {_lockedBy.GetType().Name}"
+            );
+            return;
+        }
+        Logger.LogDebug("Changing state:", newState.Name);
+
+        var old = CurrentState;
         CurrentState = newState;
-        EmitSignal(SignalName.OnStateChange, newState);
+        old.Exit();
+        CurrentState.Enter();
+        EmitSignal(SignalName.OnStateChange, CurrentState);
+    }
+
+    public void Lock(object locker)
+    {
+        if (locker != _lockedBy && _lockedBy is not null)
+        {
+            Logger.LogWarning(
+                $"Attempted lock by {locker.GetType().Name} but lock is owned by {_lockedBy.GetType().Name}"
+            );
+            return;
+        }
+
+        _isLocked = true;
+        _lockedBy = locker;
+    }
+
+    public void Unlock(object locker)
+    {
+        if (locker != _lockedBy && _lockedBy is not null)
+        {
+            Logger.LogWarning(
+                $"Attempted lock by {locker.GetType().Name} but lock is owned by {_lockedBy.GetType().Name}"
+            );
+            return;
+        }
+
+        _isLocked = false;
+        _lockedBy = null;
     }
 }

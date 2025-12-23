@@ -15,6 +15,10 @@ public partial class ScrollingBackground : Node2D
     [Export]
     private TileMapLayer _tileMapRight;
 
+    [ExportCategory("Dying")]
+    [Export]
+    private int _dyingTimeSeconds = 3;
+
     private Viewport _viewport;
 
     public override void _Ready()
@@ -31,5 +35,21 @@ public partial class ScrollingBackground : Node2D
             Position = Vector2.Zero;
 
         Position -= new Vector2(ScrollSpeed, 0) * (float)delta;
+    }
+
+    public void Stop()
+    {
+        var tween = CreateTween().SetTrans(Tween.TransitionType.Expo).SetEase(Tween.EaseType.Out);
+        tween.TweenMethod(
+            Callable.From(
+                (int x) =>
+                {
+                    ScrollSpeed = x;
+                }
+            ),
+            ScrollSpeed,
+            0,
+            _dyingTimeSeconds
+        );
     }
 }
