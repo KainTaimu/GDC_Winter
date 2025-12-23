@@ -1,11 +1,12 @@
-[gd_scene load_steps=11 format=4 uid="uid://dlobvicb23wn8"]
+[gd_scene load_steps=12 format=4 uid="uid://dlobvicb23wn8"]
 
 [ext_resource type="Script" uid="uid://cvbd2iloh02uv" path="res://src/Level.cs" id="1_hlhxn"]
 [ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/ScrollingBackground.cs" id="1_wjax6"]
 [ext_resource type="Texture2D" uid="uid://bxym02by0gd5h" path="res://assets/grid_dark.png" id="1_y1inj"]
 [ext_resource type="PackedScene" uid="uid://d2bbcd0umajki" path="res://scenes/Player.tscn" id="2_6sk48"]
 [ext_resource type="Script" uid="uid://cntxodvl5atsm" path="res://src/Obstacles/ObstacleManager.cs" id="3_a3ru1"]
-[ext_resource type="PackedScene" uid="uid://c7r6okn8p8ni4" path="res://scenes/ObstacleCrate.tscn" id="4_a3ru1"]
+[ext_resource type="PackedScene" uid="uid://dnfppai1wbb4" path="res://scenes/ObstacleTurret.tscn" id="5_hlhxn"]
+[ext_resource type="PackedScene" uid="uid://c7r6okn8p8ni4" path="res://scenes/ObstacleCrate.tscn" id="6_ynw6u"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sk48"]
 content_margin_left = 0.0
@@ -335,7 +336,8 @@ metadata/_edit_lock_ = true
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
-ExtResource("4_a3ru1"): 4
+ExtResource("5_hlhxn"): 4,
+ExtResource("6_ynw6u"): 3
 })
 _spawnTimeMin = 1.0
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")

@@ -27,12 +27,18 @@ public partial class ObstacleManager : Node
 
     private readonly List<Obstacle> _obstacles = [];
     private readonly Queue<Obstacle> _onObstacles = [];
-    private readonly Queue<Obstacle> _offObstacles = [];
 
     private Timer _spawnTimer = new() { Autostart = true };
 
     public override void _Ready()
     {
+        // Disable on player death
+        GameWorld.Instance.OnPlayerDeath += () =>
+        {
+            _enabled = false;
+            _spawnTimer.Stop();
+        };
+
         PopulatePool();
 
         var time = GD.RandRange(_spawnTimeMin, _spawnTimeMax);
@@ -46,15 +52,23 @@ public partial class ObstacleManager : Node
         // if (Engine.GetProcessFrames() % 10 == 0)
         // {
         //     Logger.LogDebug($"On", string.Join(", ", _onObstacles));
-        //     Logger.LogDebug($"Off", string.Join(", ", _offObstacles));
+        //     Logger.LogDebug($"Off", string.Join(", ", _obstacles));
         //     Logger.LogDebug(_spawnTimer.WaitTime);
         // }
     }
 
+    // BUG: Performance issues. Shuffle is O(n) and RemoveAt is O(n) at worse case.
     public void SpawnObstacle()
     {
-        if (!_offObstacles.TryDequeue(out var obstacle))
+        if (!_enabled)
             return;
+        if (_obstacles.Count == 0)
+            return;
+
+        var idx = GD.RandRange(0, _obstacles.Count - 1);
+        var obstacle = _obstacles[idx];
+        _obstacles.RemoveAt(GD.RandRange(0, _obstacles.Count - 1));
+        _obstacles.Shuffle();
 
         _onObstacles.Enqueue(obstacle);
 
@@ -100,7 +114,7 @@ public partial class ObstacleManager : Node
                             break;
                     }
                     _onObstacles.Dequeue();
-                    _offObstacles.Enqueue(obstacle);
+                    _obstacles.Add(obstacle);
                 };
 
                 obstacle.Name = obstacle.Name + " " + i;
@@ -112,7 +126,6 @@ public partial class ObstacleManager : Node
                     .CallDeferred();
 
                 _obstacles.Add(obstacle);
-                _offObstacles.Enqueue(obstacle);
                 AddChild(obstacle);
             }
         }

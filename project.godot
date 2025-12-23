@@ -81,6 +81,7 @@ move_right={
 2d_physics/layer_1="ObstacleInteraction"
 2d_physics/layer_2="ObstacleCollision"
 2d_physics/layer_3="ObstacleExit"
+2d_physics/layer_5="Projectile"
 2d_physics/layer_9="PlayerInteraction"
 2d_physics/layer_10="PlayerCollision"
 

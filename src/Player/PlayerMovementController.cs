@@ -1,9 +1,9 @@
 using System.Linq;
 using Godot.Collections;
 
-namespace Game.Player;
+namespace Game.Players;
 
-public partial class PlayerMovementController : Node, IStateMachine
+public partial class PlayerMovementController : Node
 {
     [Signal]
     public delegate void OnStateChangeEventHandler(State newState);
@@ -65,23 +65,6 @@ public partial class PlayerMovementController : Node, IStateMachine
     public void PhysicsUpdate(double delta)
     {
         CurrentState?.PhysicsProcess(delta);
-    }
-
-    public void ChangeState(IState newState)
-    {
-        if (_isLocked)
-        {
-            Logger.LogWarning(
-                $"Failed to change state to {newState.GetType().Name}. Locked by {_lockedBy.GetType().Name}"
-            );
-            return;
-        }
-
-        var old = CurrentState;
-        CurrentState = (State)newState;
-        old.Exit();
-        CurrentState.Enter();
-        EmitSignal(SignalName.OnStateChange, CurrentState);
     }
 
     public void ChangeState<T>()

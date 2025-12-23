@@ -1,3 +1,5 @@
+using Game.Players;
+
 namespace Game;
 
 public partial class GameWorld : Node
@@ -33,5 +35,19 @@ public partial class GameWorld : Node
             _currentLevel = value;
             EmitSignal(SignalName.OnLevelChange, value);
         }
+    }
+
+    public Player MainPlayer
+    {
+        get => _mainPlayer;
+        set { _mainPlayer = value; }
+    }
+
+    private Player _mainPlayer;
+
+    public void AnnouncePlayerDead(Node caller)
+    {
+        Logger.LogDebug($"{caller.GetType().Name} announced player death.");
+        EmitSignal(SignalName.OnPlayerDeath);
     }
 }

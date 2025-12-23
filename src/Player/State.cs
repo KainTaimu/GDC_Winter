@@ -1,4 +1,4 @@
-using Game.Player;
+using Game.Players;
 
 namespace Game;
 

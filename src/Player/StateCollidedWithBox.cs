@@ -1,4 +1,4 @@
-namespace Game.Player;
+namespace Game.Players;
 
 public partial class StateCollidedWithBox : State
 {
@@ -10,15 +10,7 @@ public partial class StateCollidedWithBox : State
 
     public override void Enter()
     {
-        _statController.Stats.Health -= 1;
-        if (_statController.Stats.Health <= 0)
-        {
-            MovementController.ChangeState<StateDying>();
-        }
-        else
-        {
-            // _collisionArea.AreaExited += AfterCollisionWithBox;
-        }
+        _statController.HandleHit(1); // TODO: Custom damage by obstacle type.
     }
 
     public override void Exit() { }

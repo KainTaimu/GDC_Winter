@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://b0tt02381medl" path="res://assets/border.png" id="1_jde5u"]
 [ext_resource type="Script" uid="uid://brllsqfwl1bwu" path="res://src/Obstacles/Obstacle.cs" id="1_qf6v3"]
-[ext_resource type="Script" uid="uid://c1hi35j2oyplq" path="res://src/Player/InteractionArea.cs" id="3_n8ntr"]
-[ext_resource type="Script" uid="uid://dxxvd2jfic8e5" path="res://src/Player/CollisionArea.cs" id="4_nhv7q"]
+[ext_resource type="Script" uid="uid://c1hi35j2oyplq" path="res://src/Obstacles/ObstacleInteractionArea.cs" id="3_n8ntr"]
+[ext_resource type="Script" uid="uid://dxxvd2jfic8e5" path="res://src/Obstacles/ObstacleCollisionArea.cs" id="4_nhv7q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_sdg2s"]
 size = Vector2(72, 68)

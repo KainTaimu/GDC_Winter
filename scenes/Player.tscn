@@ -1,8 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=17 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
+[ext_resource type="Script" uid="uid://bgc137qeeq2w3" path="res://src/Player/PlayerInteractionArea.cs" id="2_o4126"]
 [ext_resource type="Script" uid="uid://bkn66m3ny3jmx" path="res://src/Player/Stats.cs" id="2_v6fml"]
 [ext_resource type="Script" uid="uid://cg86rxne1e6gv" path="res://src/Player/StateGrounded.cs" id="3_70d11"]
+[ext_resource type="Script" uid="uid://cucb1v8pg40nq" path="res://src/Player/PlayerCollisionArea.cs" id="3_lkdrv"]
 [ext_resource type="Script" uid="uid://8j2d8vml6hda" path="res://src/Player/PlayerMovementController.cs" id="3_mdl7e"]
 [ext_resource type="Script" uid="uid://c6osxa27rawlj" path="res://src/Player/StatController.cs" id="4_cw2d6"]
 [ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
@@ -38,27 +40,32 @@ scale = Vector2(0.75, 0.75)
 script = ExtResource("1_p0vlq")
 StatController = NodePath("StatController")
 
-[node name="InteractionArea" type="Area2D" parent="."]
+[node name="InteractionArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
 position = Vector2(0, -64)
 collision_layer = 256
+script = ExtResource("2_o4126")
+Player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 position = Vector2(96, -9.1552734e-05)
 shape = SubResource("RectangleShape2D_70d11")
 
-[node name="CollisionArea" type="Area2D" parent="."]
+[node name="CollisionArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
 position = Vector2(0, -61.333336)
 collision_layer = 512
 collision_mask = 2
+script = ExtResource("3_lkdrv")
+Player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
 position = Vector2(0, -2.6666603)
 shape = SubResource("RectangleShape2D_cw2d6")
 debug_color = Color(0.9607843, 0, 0, 0.41960785)
 
-[node name="StatController" type="Node" parent="."]
+[node name="StatController" type="Node" parent="." node_paths=PackedStringArray("_movementController")]
 script = ExtResource("4_cw2d6")
 Stats = SubResource("Resource_khinc")
+_movementController = NodePath("../MovementController")
 
 [node name="MovementController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")

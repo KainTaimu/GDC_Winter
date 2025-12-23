@@ -1,4 +1,4 @@
-namespace Game.Player;
+namespace Game.Players;
 
 public partial class StateDying : State
 {

@@ -1,4 +1,4 @@
-namespace Game.Player;
+namespace Game.Players;
 
 public partial class PlayerInfo : Control
 {
@@ -14,15 +14,14 @@ public partial class PlayerInfo : Control
     [Export]
     private Label _currentState;
 
-    public override void _Ready()
+    public override void _Process(double delta)
     {
-        _movementController.OnStateChange += UpdateLabel;
-        UpdateLabel(_movementController.CurrentState);
+        UpdateLabel();
     }
 
-    private void UpdateLabel(State newState)
+    private void UpdateLabel()
     {
         _health.Text = $"Health: {_statController.Stats.Health}";
-        _currentState.Text = $"CurrentState: {newState.Name}";
+        _currentState.Text = $"CurrentState: {_movementController.CurrentState}";
     }
 }

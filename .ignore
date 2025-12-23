@@ -11,3 +11,7 @@
 LICENSE
 assets/
 addons/
+project.godot
+*.json
+icon.svg
+*.sln

@@ -1,7 +1,7 @@
 using System.Linq;
 using Game.Obstacles;
 
-namespace Game.Player;
+namespace Game.Players;
 
 public partial class StateGrounded : State
 {
@@ -38,7 +38,8 @@ public partial class StateGrounded : State
         if (interactable.Count == 0)
             return;
 
-        var interactionArea = interactable.OfType<InteractionArea>().FirstOrDefault() ?? null;
+        var interactionArea =
+            interactable.OfType<ObstacleInteractionArea>().FirstOrDefault() ?? null;
         if (interactionArea is null)
             return;
 
