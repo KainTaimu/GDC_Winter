@@ -52,7 +52,9 @@ public partial class PickupPresent : Area2D, IPickupable
 	{
 		ScoreController.Instance.Score += _score;
 		_isPickedUp = true;
-		QueueFree();
+		var tween = CreateTween();
+		tween.TweenProperty(this, "scale", Vector2.Zero, 0.2);
+		tween.TweenCallback(Callable.From(QueueFree));
 	}
 
 	private void RandomizeHue()
