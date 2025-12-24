@@ -84,6 +84,7 @@ move_right={
 2d_physics/layer_5="Projectile"
 2d_physics/layer_9="PlayerInteraction"
 2d_physics/layer_10="PlayerCollision"
+2d_physics/layer_13="Pickup"
 
 [project_time_traker]
 
