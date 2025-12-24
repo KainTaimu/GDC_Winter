@@ -23,6 +23,7 @@ size = Vector2(128, 128)
 [sub_resource type="Resource" id="Resource_khinc"]
 resource_local_to_scene = true
 script = ExtResource("2_v6fml")
+MaxHealth = 5
 metadata/_custom_type_script = "uid://bkn66m3ny3jmx"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p7iby"]

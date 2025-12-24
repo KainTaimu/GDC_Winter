@@ -11,7 +11,7 @@ public partial class WeaponTurret : Weapon
     [Export]
     private Timer _timer;
 
-    private const int FORWARD_COMPENSATION = 100;
+    private const int FORWARD_COMPENSATION = 0;
 
     public override void _Ready()
     {
@@ -32,7 +32,6 @@ public partial class WeaponTurret : Weapon
         projectile.Initialize(this);
         projectile.SetPosition(Position);
         projectile.SetRotation(GetAngleFromPlayer());
-        projectile.ProjectileSpeed = -Stats.ProjectileSpeed; // BUG: Shoots backwards if not negative
         projectile.TargetsWhat = ProjectileTargetsWhat.Player;
         AddChild(projectile);
     }

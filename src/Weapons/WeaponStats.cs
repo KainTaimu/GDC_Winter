@@ -7,8 +7,5 @@ public partial class WeaponStats : Resource
     public int Damage = 1;
 
     [Export]
-    public int ProjectileSpeed = 1200;
-
-    [Export]
     public float AttackSpeed = 1;
 }

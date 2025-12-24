@@ -10,7 +10,7 @@ public partial class Projectile : Area2D
 
     public ProjectileTargetsWhat TargetsWhat = ProjectileTargetsWhat.Player;
 
-    private Weapon _origin;
+    protected Weapon _origin;
 
     public void Initialize(Weapon origin)
     {

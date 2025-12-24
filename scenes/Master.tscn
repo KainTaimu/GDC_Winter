@@ -336,8 +336,8 @@ metadata/_edit_lock_ = true
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
-ExtResource("5_hlhxn"): 1,
-ExtResource("6_ynw6u"): 0
+ExtResource("5_hlhxn"): 2,
+ExtResource("6_ynw6u"): 2
 })
 _spawnTimeMin = 1.0
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")

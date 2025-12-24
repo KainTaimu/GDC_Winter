@@ -5,9 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://dmm2wcm8gqjis" path="res://assets/bullet.png" id="3_xcd42"]
 
 [node name="ProjectileBullet" instance=ExtResource("1_k5b6b")]
+process_mode = 1
 script = ExtResource("2_5nfhu")
 
 [node name="Sprite2D" type="Sprite2D" parent="." index="1"]
+position = Vector2(0, 2.9802322e-08)
+scale = Vector2(1.3333334, 0.5)
 texture = ExtResource("3_xcd42")
 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." index="2"]
