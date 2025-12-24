@@ -360,6 +360,7 @@ metadata/_edit_lock_ = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dev/ExitAreaLeft"]
 shape = SubResource("RectangleShape2D_wjax6")
+metadata/_edit_lock_ = true
 
 [node name="GroundMarker" type="Marker2D" parent="Dev"]
 position = Vector2(2110, 933)
