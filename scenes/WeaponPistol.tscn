@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cykq5gbxdf3ya"]
+
+[ext_resource type="Script" uid="uid://cdw1vspvyvtr3" path="res://src/Weapons/WeaponPistol.cs" id="1_uo7es"]
+[ext_resource type="PackedScene" uid="uid://cwg72rcbdk6q3" path="res://scenes/ProjectileBullet.tscn" id="2_u3dvj"]
+[ext_resource type="Script" uid="uid://c6d4d3lnj4je5" path="res://src/Weapons/WeaponStats.cs" id="3_oiiwo"]
+
+[sub_resource type="Resource" id="Resource_t1kwd"]
+resource_local_to_scene = true
+script = ExtResource("3_oiiwo")
+Additional = Dictionary[String, Variant]({
+"BloomCoefficient": 0.03,
+"HorizontalBaseRecoil": 2.0,
+"HorizontalRecoilRandom": 1.0,
+"MagazineCapacity": 5,
+"ReloadTimeMs": 500,
+"VerticalBaseRecoil": 2.0,
+"VerticalRecoilRandom": 0.1
+})
+metadata/_custom_type_script = "uid://c6d4d3lnj4je5"
+
+[node name="Pistol" type="Node2D"]
+script = ExtResource("1_uo7es")
+_projectileScene = ExtResource("2_u3dvj")
+Stats = SubResource("Resource_t1kwd")

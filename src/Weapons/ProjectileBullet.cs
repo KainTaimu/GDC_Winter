@@ -4,6 +4,11 @@ public partial class ProjectileBullet : Projectile
 {
     public float InitialDistance;
 
+    public override void Initialize(Weapon origin)
+    {
+        base.Initialize(origin);
+    }
+
     public override void _Process(double delta)
     {
         MoveTowardPoint(delta);

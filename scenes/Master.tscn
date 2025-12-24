@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=4 uid="uid://dlobvicb23wn8"]
+[gd_scene load_steps=15 format=4 uid="uid://dlobvicb23wn8"]
 
 [ext_resource type="Script" uid="uid://cvbd2iloh02uv" path="res://src/Level.cs" id="1_hlhxn"]
 [ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/ScrollingBackground.cs" id="1_wjax6"]
 [ext_resource type="Texture2D" uid="uid://bxym02by0gd5h" path="res://assets/grid_dark.png" id="1_y1inj"]
 [ext_resource type="PackedScene" uid="uid://d2bbcd0umajki" path="res://scenes/Player.tscn" id="2_6sk48"]
 [ext_resource type="Script" uid="uid://cntxodvl5atsm" path="res://src/Obstacles/ObstacleManager.cs" id="3_a3ru1"]
-[ext_resource type="PackedScene" uid="uid://ixdcy7e2hu2p" path="res://src/Hud/Crosshair.tscn" id="4_08hre"]
 [ext_resource type="PackedScene" uid="uid://dnfppai1wbb4" path="res://scenes/ObstacleTurret.tscn" id="5_hlhxn"]
 [ext_resource type="PackedScene" uid="uid://c7r6okn8p8ni4" path="res://scenes/ObstacleCrate.tscn" id="6_ynw6u"]
 [ext_resource type="Script" uid="uid://sk0wfw07ye4m" path="res://src/Pickups/PickupsManager.cs" id="7_1rpht"]
@@ -337,13 +336,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAI
 tile_set = SubResource("TileSet_keclr")
 metadata/_edit_lock_ = true
 
-[node name="Hud" type="Node" parent="."]
-
-[node name="Crosshair" parent="Hud" instance=ExtResource("4_08hre")]
-layer = 2
-
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
+_enabled = false
 _obstacleTypes = Dictionary[PackedScene, int]({
 ExtResource("5_hlhxn"): 1,
 ExtResource("6_ynw6u"): 3
@@ -354,6 +349,7 @@ _roofSpawnPoint = NodePath("../Dev/RoofMarker")
 
 [node name="PickupsManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint")]
 script = ExtResource("7_1rpht")
+_enabled = false
 _pickupTypes = Array[PackedScene]([ExtResource("8_1ltef")])
 _spawnTimeMin = 1.0
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")

@@ -1,3 +1,5 @@
+using Godot.Collections;
+
 namespace Game.Weapons;
 
 [GlobalClass]
@@ -8,4 +10,7 @@ public partial class WeaponStats : Resource
 
     [Export]
     public float AttackSpeed = 1;
+
+    [Export]
+    public Dictionary<string, Variant> Additional;
 }

@@ -1,5 +1,6 @@
 namespace Game.Hud;
 
+[Obsolete("Out of time")]
 public partial class Crosshair : Node2D
 {
     [Export]

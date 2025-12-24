@@ -12,7 +12,7 @@ public partial class Projectile : Area2D
 
     protected Weapon _origin;
 
-    public void Initialize(Weapon origin)
+    public virtual void Initialize(Weapon origin)
     {
         _origin = origin;
         OnEntityHit += _origin.OnProjectileHit;
