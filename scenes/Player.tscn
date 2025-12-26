@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=29 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bgc137qeeq2w3" path="res://src/Player/PlayerInteractionArea.cs" id="2_o4126"]
@@ -14,9 +14,10 @@
 [ext_resource type="Script" uid="uid://b772txwbwooi6" path="res://src/Player/StateDying.cs" id="8_6eyey"]
 [ext_resource type="Shader" uid="uid://bbwua2g02t0jl" path="res://src/Shaders/flash.gdshader" id="11_lkdrv"]
 [ext_resource type="Script" uid="uid://m44pemv1whga" path="res://src/Player/StateParry.cs" id="11_p7iby"]
+[ext_resource type="Texture2D" uid="uid://bryuim5u8eqi6" path="res://assets/qubit_slip.png" id="14_0rnld"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
-size = Vector2(320, 127.999825)
+size = Vector2(412, 127.999825)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_cw2d6"]
 size = Vector2(128, 128)
@@ -27,7 +28,6 @@ radius = 346.77
 [sub_resource type="Resource" id="Resource_khinc"]
 resource_local_to_scene = true
 script = ExtResource("2_v6fml")
-MaxHealth = 999
 metadata/_custom_type_script = "uid://bkn66m3ny3jmx"
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p7iby"]
@@ -35,6 +35,34 @@ resource_local_to_scene = true
 shader = ExtResource("11_lkdrv")
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/flash_state = 0.0
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0rnld"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 0, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_srp4u"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(50, 0, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jfpux"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 20, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_61ith"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(50, 20, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ebwui"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 40, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sfy4j"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(50, 40, 50, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gv3ic"]
+atlas = ExtResource("14_0rnld")
+region = Rect2(0, 60, 50, 20)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_70d11"]
 animations = [{
@@ -44,6 +72,32 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0rnld")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_srp4u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jfpux")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_61ith")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ebwui")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sfy4j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gv3ic")
+}],
+"loop": false,
+"name": &"dying",
 "speed": 5.0
 }]
 
@@ -59,7 +113,7 @@ script = ExtResource("2_o4126")
 Player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
-position = Vector2(96, -9.1552734e-05)
+position = Vector2(142, -9.1552734e-05)
 shape = SubResource("RectangleShape2D_70d11")
 
 [node name="CollisionArea" type="Area2D" parent="." node_paths=PackedStringArray("Player")]
@@ -116,8 +170,9 @@ _collisionArea = NodePath("../../CollisionArea")
 _statController = NodePath("../../StatController")
 MovementController = NodePath("..")
 
-[node name="Dying" type="Node" parent="MovementController" node_paths=PackedStringArray("MovementController")]
+[node name="Dying" type="Node" parent="MovementController" node_paths=PackedStringArray("_sprite", "MovementController")]
 script = ExtResource("8_6eyey")
+_sprite = NodePath("../../AnimatedSprite2D")
 MovementController = NodePath("..")
 
 [node name="Parry" type="Node" parent="MovementController" node_paths=PackedStringArray("_parryArea", "MovementController")]
