@@ -11,7 +11,7 @@ public partial class WeaponTurret : Weapon
     [Export]
     private Timer _timer;
 
-    private const int FORWARD_COMPENSATION = 0;
+    private const int FORWARD_COMPENSATION = 600;
 
     public override void _Ready()
     {

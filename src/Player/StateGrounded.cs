@@ -31,9 +31,21 @@ public partial class StateGrounded : State
 
     public override void Process(double delta)
     {
-        if (!Input.IsActionJustPressed(InputMapNames.MoveUp))
-            return;
+        if (Input.IsActionJustPressed(InputMapNames.MoveUp))
+            Jump();
+        else if (Input.IsActionJustPressed(InputMapNames.MoveDown))
+        {
+            Parry();
+        }
+    }
 
+    private void OnObstacleCollision(Area2D collision)
+    {
+        MovementController.ChangeState<StateCollidedWithBox>();
+    }
+
+    private void Jump()
+    {
         var interactable = _interactionArea.GetOverlappingAreas();
         if (interactable.Count == 0)
             return;
@@ -54,8 +66,8 @@ public partial class StateGrounded : State
         }
     }
 
-    private void OnObstacleCollision(Area2D collision)
+    private void Parry()
     {
-        MovementController.ChangeState<StateCollidedWithBox>();
+        MovementController.ChangeState<StateParry>();
     }
 }
