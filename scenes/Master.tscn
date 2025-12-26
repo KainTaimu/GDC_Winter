@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=4 uid="uid://dlobvicb23wn8"]
+[gd_scene load_steps=21 format=4 uid="uid://dlobvicb23wn8"]
 
 [ext_resource type="Script" uid="uid://cvbd2iloh02uv" path="res://src/Level.cs" id="1_hlhxn"]
 [ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/ScrollingBackground.cs" id="1_wjax6"]
@@ -10,6 +10,8 @@
 [ext_resource type="Script" uid="uid://sk0wfw07ye4m" path="res://src/Pickups/PickupsManager.cs" id="7_1rpht"]
 [ext_resource type="PackedScene" uid="uid://dr2b3j1tt7876" path="res://scenes/ScoreController.tscn" id="7_lkd2y"]
 [ext_resource type="PackedScene" uid="uid://0wrb0pqo4viu" path="res://scenes/PickupPresent.tscn" id="8_1ltef"]
+[ext_resource type="Shader" uid="uid://c7sqd2bx5ckb0" path="res://src/Shaders/fade.gdshader" id="11_1i5ah"]
+[ext_resource type="Texture2D" uid="uid://den8slt08ehuh" path="res://assets/small_chevron.png" id="11_08hre"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sk48"]
 content_margin_left = 0.0
@@ -290,6 +292,30 @@ sources/0 = SubResource("TileSetAtlasSource_6sk48")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wjax6"]
 size = Vector2(300, 786)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wpumy"]
+shader = ExtResource("11_1i5ah")
+shader_parameter/opacity = 1.0
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1i5ah"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(500, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1360, 1, 1)
+initial_velocity_max = 146.55
+gravity = Vector3(-700, 500, 0)
+scale_min = 0.5
+scale_max = 3.0
+turbulence_enabled = true
+turbulence_influence_min = 0.010000001
+turbulence_influence_max = 0.05
+collision_mode = 2
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_08hre"]
+polygon = PackedVector2Array(0, 933, 0, 1080, 1920, 1080, 1920, 933)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1i5ah"]
+polygon = PackedVector2Array(0, 0, 0, 1080, -100, 1080, -100, 0)
+
 [node name="Master" type="Node" node_paths=PackedStringArray("GroundMarker", "ScrollingBackground")]
 script = ExtResource("1_hlhxn")
 GroundMarker = NodePath("Dev/GroundMarker")
@@ -383,4 +409,25 @@ metadata/_edit_lock_ = true
 [node name="RoofMarker" type="Marker2D" parent="Dev"]
 position = Vector2(2110, 147)
 gizmo_extents = 30.0
+metadata/_edit_lock_ = true
+
+[node name="VFX" type="Node" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="VFX"]
+material = SubResource("ShaderMaterial_wpumy")
+position = Vector2(960, 0)
+amount = 1200
+texture = ExtResource("11_08hre")
+lifetime = 10.0
+preprocess = 30.0
+randomness = 0.5
+process_material = SubResource("ParticleProcessMaterial_1i5ah")
+metadata/_edit_lock_ = true
+
+[node name="HorizontalParticleKillZone" type="LightOccluder2D" parent="VFX"]
+occluder = SubResource("OccluderPolygon2D_08hre")
+metadata/_edit_lock_ = true
+
+[node name="VerticalParticleKillZone" type="LightOccluder2D" parent="VFX"]
+occluder = SubResource("OccluderPolygon2D_1i5ah")
 metadata/_edit_lock_ = true
