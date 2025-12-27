@@ -15,8 +15,6 @@ public partial class StateCollidedWithBox : State
 
     public override void Exit() { }
 
-    public override void _Ready() { }
-
     private void AfterCollisionWithBox(Area2D area)
     {
         MovementController.ChangeState<StateGrounded>();

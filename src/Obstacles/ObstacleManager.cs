@@ -67,7 +67,7 @@ public partial class ObstacleManager : Node
 
         var idx = GD.RandRange(0, _obstacles.Count - 1);
         var obstacle = _obstacles[idx];
-        _obstacles.RemoveAt(GD.RandRange(0, _obstacles.Count - 1));
+        _obstacles.RemoveAt(idx);
         _obstacles.Shuffle();
 
         _onObstacles.Enqueue(obstacle);

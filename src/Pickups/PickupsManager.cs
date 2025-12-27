@@ -37,8 +37,6 @@ public partial class PickupsManager : Node
         _spawnTimer.Timeout += SpawnPickup;
     }
 
-    public override void _Process(double delta) { }
-
     // BUG: Timer is never disabled when _!enabled
     public void SpawnPickup()
     {

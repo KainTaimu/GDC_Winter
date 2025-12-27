@@ -9,8 +9,6 @@ public partial class StateParry : State
 
     private double _cooldown;
 
-    public override void _Process(double delta) { }
-
     public override void Enter()
     {
         var overlapping = _parryArea.GetOverlappingAreas();

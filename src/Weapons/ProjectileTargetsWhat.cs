@@ -6,6 +6,6 @@ namespace Game.Weapons;
 [Flags]
 public enum ProjectileTargetsWhat
 {
-    Player,
-    Obstacle,
+    Player = 0,
+    Obstacle = 1,
 }

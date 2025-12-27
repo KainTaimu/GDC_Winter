@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=4 uid="uid://dlobvicb23wn8"]
+[gd_scene load_steps=23 format=4 uid="uid://dlobvicb23wn8"]
 
 [ext_resource type="Script" uid="uid://cvbd2iloh02uv" path="res://src/Level.cs" id="1_hlhxn"]
 [ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/ScrollingBackground.cs" id="1_wjax6"]
@@ -6,6 +6,8 @@
 [ext_resource type="PackedScene" uid="uid://d2bbcd0umajki" path="res://scenes/Player.tscn" id="2_6sk48"]
 [ext_resource type="Script" uid="uid://cntxodvl5atsm" path="res://src/Obstacles/ObstacleManager.cs" id="3_a3ru1"]
 [ext_resource type="PackedScene" uid="uid://2q4cien0ihv7" path="res://scenes/ObstacleDrone.tscn" id="5_1i5ah"]
+[ext_resource type="PackedScene" uid="uid://dnfppai1wbb4" path="res://scenes/ObstacleTurret.tscn" id="5_hlhxn"]
+[ext_resource type="PackedScene" uid="uid://c7r6okn8p8ni4" path="res://scenes/ObstacleCrate.tscn" id="6_ynw6u"]
 [ext_resource type="Script" uid="uid://sk0wfw07ye4m" path="res://src/Pickups/PickupsManager.cs" id="7_1rpht"]
 [ext_resource type="PackedScene" uid="uid://dr2b3j1tt7876" path="res://scenes/ScoreController.tscn" id="7_lkd2y"]
 [ext_resource type="PackedScene" uid="uid://0wrb0pqo4viu" path="res://scenes/PickupPresent.tscn" id="8_1ltef"]
@@ -365,7 +367,9 @@ metadata/_edit_lock_ = true
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
-ExtResource("5_1i5ah"): 1
+ExtResource("5_1i5ah"): 0,
+ExtResource("6_ynw6u"): 2,
+ExtResource("5_hlhxn"): 2
 })
 _spawnTimeMin = 0.2
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")

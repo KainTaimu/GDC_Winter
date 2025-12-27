@@ -36,8 +36,4 @@ public partial class ScoreController : Node
 
 		Instance = this;
 	}
-
-	public override void _Ready() { }
-
-	public override void _Process(double delta) { }
 }
