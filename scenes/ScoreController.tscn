@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://cdlt1la4m1h72" path="res://src/ScoreController.cs" id="1_n8qy0"]
 
-[node name="ScoreController" type="Node" node_paths=PackedStringArray("_scoreLabel")]
+[node name="ScoreController" type="Node" node_paths=PackedStringArray("_scoreLabel", "_timeLabel")]
 script = ExtResource("1_n8qy0")
 _scoreLabel = NodePath("CanvasLayer/VBoxContainer/Score")
+_timeLabel = NodePath("CanvasLayer/VBoxContainer/Time")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -16,7 +17,7 @@ offset_bottom = 56.0
 
 [node name="Score" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2
-text = "Score: "
+text = "Score: 0"
 
 [node name="Time" type="Label" parent="CanvasLayer/VBoxContainer"]
 layout_mode = 2

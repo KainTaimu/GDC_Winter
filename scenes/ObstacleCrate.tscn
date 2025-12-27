@@ -19,3 +19,8 @@ Obstacle = NodePath("..")
 [node name="Top" type="Marker2D" parent="." index="3"]
 position = Vector2(0, -64)
 gizmo_extents = 12.0
+
+[node name="Hints" parent="." index="4"]
+offset_top = -84.0
+offset_bottom = -84.0
+_directions = Array[int]([0])

@@ -377,7 +377,6 @@ _roofSpawnPoint = NodePath("../Dev/RoofMarker")
 
 [node name="PickupsManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint")]
 script = ExtResource("7_1rpht")
-_enabled = false
 _pickupTypes = Array[PackedScene]([ExtResource("8_1ltef")])
 _spawnTimeMin = 1.0
 _spawnTimeMax = 2.0

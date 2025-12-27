@@ -8,6 +8,7 @@
 
 [sub_resource type="Resource" id="Resource_wr0kc"]
 script = ExtResource("4_b2qr7")
+Additional = null
 metadata/_custom_type_script = "uid://c6d4d3lnj4je5"
 
 [node name="ObstacleTurret" instance=ExtResource("1_lxscg")]
@@ -50,3 +51,8 @@ position = Vector2(0, 64)
 
 [node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="WeaponTurret" index="2"]
 rect = Rect2(-36, -36, 72, 72)
+
+[node name="Hints" parent="." index="4"]
+offset_top = 80.0
+offset_bottom = 80.0
+_directions = Array[int]([2])
