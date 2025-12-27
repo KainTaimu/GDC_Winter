@@ -28,6 +28,7 @@ public partial class StateParry : State
         {
             case ProjectileBullet bullet:
                 // Reflect
+                // BUG: Can reflect more than once while projectile is in parry area
                 bullet.GlobalRotation *= -1;
                 bullet.Velocity = 1200;
                 bullet.SetDeferred(Area2D.PropertyName.Monitoring, false);

@@ -9,7 +9,7 @@ public partial class StateGrounded : State
     private Node2D _owner;
 
     [Export]
-    private StatController _statController;
+    private PlayerHealthController _statController;
 
     [Export]
     private Area2D _interactionArea;

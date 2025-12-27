@@ -5,7 +5,7 @@ namespace Game.Players;
 public partial class Player : Node2D, IHittable
 {
     [Export]
-    public StatController StatController { get; private set; }
+    public PlayerHealthController StatController { get; private set; }
 
     public override void _EnterTree()
     {

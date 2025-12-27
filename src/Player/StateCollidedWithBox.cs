@@ -6,7 +6,7 @@ public partial class StateCollidedWithBox : State
     private Area2D _collisionArea;
 
     [Export]
-    private StatController _statController;
+    private PlayerHealthController _statController;
 
     public override void Enter()
     {

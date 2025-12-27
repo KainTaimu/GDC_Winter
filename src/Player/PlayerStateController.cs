@@ -3,7 +3,7 @@ using Godot.Collections;
 
 namespace Game.Players;
 
-public partial class PlayerMovementController : Node
+public partial class PlayerStateController : Node
 {
     [Signal]
     public delegate void OnStateChangeEventHandler(State newState);
@@ -25,7 +25,7 @@ public partial class PlayerMovementController : Node
     private AnimatedSprite2D _sprite;
 
     [Export]
-    private StatController _statController;
+    private PlayerHealthController _statController;
 
     private bool _isLocked;
     private object _lockedBy;

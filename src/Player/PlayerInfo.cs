@@ -3,10 +3,10 @@ namespace Game.Players;
 public partial class PlayerInfo : Control
 {
     [Export]
-    private PlayerMovementController _movementController;
+    private PlayerStateController _movementController;
 
     [Export]
-    private StatController _statController;
+    private PlayerHealthController _statController;
 
     [Export]
     private Label _health;

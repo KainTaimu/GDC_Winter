@@ -5,7 +5,7 @@ namespace Game;
 public partial class State : Node, IState
 {
     [Export]
-    protected PlayerMovementController MovementController { get; private set; }
+    protected PlayerStateController MovementController { get; private set; }
 
     public virtual void Enter() { }
 
