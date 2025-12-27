@@ -93,6 +93,12 @@ public partial class ObstacleManager : Node
                     case ObstacleType.Roof:
                         obstacle.Position = _roofSpawnPoint.Position;
                         break;
+                    case ObstacleType.Floating:
+                        obstacle.Position = new Vector2(
+                            _groundSpawnPoint.Position.X,
+                            GetViewport().GetVisibleRect().Size.Y / 2
+                        );
+                        break;
                 }
 
                 obstacle.OnExit += () =>
@@ -111,6 +117,12 @@ public partial class ObstacleManager : Node
                             break;
                         case ObstacleType.Roof:
                             obstacle.Position = _roofSpawnPoint.Position;
+                            break;
+                        case ObstacleType.Floating:
+                            obstacle.Position = new Vector2(
+                                _groundSpawnPoint.Position.X,
+                                GetViewport().GetVisibleRect().Size.Y / 2
+                            );
                             break;
                     }
                     _onObstacles.Dequeue();

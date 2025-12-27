@@ -4,4 +4,5 @@ public enum ObstacleType
 {
     Ground,
     Roof,
+    Floating,
 }

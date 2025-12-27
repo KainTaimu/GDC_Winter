@@ -19,10 +19,10 @@ public partial class StatController : Node
 
     public void HandleHit(int damage)
     {
-        if (Stats.Health == 0)
+        if (Stats.Health <= 0)
             return;
 
-        if (Stats.Health - damage == 0)
+        if (Stats.Health - damage <= 0)
         {
             Stats.Health = 0;
             _movementController.ChangeState<StateDying>();

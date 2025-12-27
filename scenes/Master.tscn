@@ -1,12 +1,11 @@
-[gd_scene load_steps=22 format=4 uid="uid://dlobvicb23wn8"]
+[gd_scene load_steps=21 format=4 uid="uid://dlobvicb23wn8"]
 
 [ext_resource type="Script" uid="uid://cvbd2iloh02uv" path="res://src/Level.cs" id="1_hlhxn"]
 [ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/ScrollingBackground.cs" id="1_wjax6"]
 [ext_resource type="Texture2D" uid="uid://bxym02by0gd5h" path="res://assets/grid_dark.png" id="1_y1inj"]
 [ext_resource type="PackedScene" uid="uid://d2bbcd0umajki" path="res://scenes/Player.tscn" id="2_6sk48"]
 [ext_resource type="Script" uid="uid://cntxodvl5atsm" path="res://src/Obstacles/ObstacleManager.cs" id="3_a3ru1"]
-[ext_resource type="PackedScene" uid="uid://dnfppai1wbb4" path="res://scenes/ObstacleTurret.tscn" id="5_hlhxn"]
-[ext_resource type="PackedScene" uid="uid://c7r6okn8p8ni4" path="res://scenes/ObstacleCrate.tscn" id="6_ynw6u"]
+[ext_resource type="PackedScene" uid="uid://2q4cien0ihv7" path="res://scenes/ObstacleDrone.tscn" id="5_1i5ah"]
 [ext_resource type="Script" uid="uid://sk0wfw07ye4m" path="res://src/Pickups/PickupsManager.cs" id="7_1rpht"]
 [ext_resource type="PackedScene" uid="uid://dr2b3j1tt7876" path="res://scenes/ScoreController.tscn" id="7_lkd2y"]
 [ext_resource type="PackedScene" uid="uid://0wrb0pqo4viu" path="res://scenes/PickupPresent.tscn" id="8_1ltef"]
@@ -365,10 +364,8 @@ metadata/_edit_lock_ = true
 
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
-_enabled = false
 _obstacleTypes = Dictionary[PackedScene, int]({
-ExtResource("5_hlhxn"): 2,
-ExtResource("6_ynw6u"): 3
+ExtResource("5_1i5ah"): 1
 })
 _spawnTimeMin = 0.2
 _groundSpawnPoint = NodePath("../Dev/GroundMarker")
@@ -376,6 +373,7 @@ _roofSpawnPoint = NodePath("../Dev/RoofMarker")
 
 [node name="PickupsManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint")]
 script = ExtResource("7_1rpht")
+_enabled = false
 _pickupTypes = Array[PackedScene]([ExtResource("8_1ltef")])
 _spawnTimeMin = 1.0
 _spawnTimeMax = 2.0
@@ -386,6 +384,7 @@ _player = NodePath("../Player")
 
 [node name="Player" parent="." instance=ExtResource("2_6sk48")]
 position = Vector2(640, 933)
+metadata/_edit_lock_ = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(960, 540)
@@ -416,14 +415,16 @@ metadata/_edit_lock_ = true
 [node name="VFX" type="Node" parent="."]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="VFX"]
-z_index = 2
+z_index = 3
 material = SubResource("ShaderMaterial_wpumy")
 position = Vector2(960, 0)
-amount = 2000
+amount = 5000
 texture = ExtResource("11_08hre")
 lifetime = 10.0
 preprocess = 30.0
 randomness = 0.5
+trail_sections = 4
+trail_section_subdivisions = 1
 process_material = SubResource("ParticleProcessMaterial_1i5ah")
 script = ExtResource("13_wpumy")
 metadata/_edit_lock_ = true
@@ -433,5 +434,6 @@ occluder = SubResource("OccluderPolygon2D_08hre")
 metadata/_edit_lock_ = true
 
 [node name="VerticalParticleKillZone" type="LightOccluder2D" parent="VFX"]
+position = Vector2(-57, 0)
 occluder = SubResource("OccluderPolygon2D_1i5ah")
 metadata/_edit_lock_ = true
