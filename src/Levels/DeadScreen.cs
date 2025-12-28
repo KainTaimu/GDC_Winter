@@ -1,4 +1,4 @@
-namespace Game;
+namespace Game.Levels;
 
 public partial class DeadScreen : CanvasLayer
 {
