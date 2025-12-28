@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://dr2b3j1tt7876"]
 
-[ext_resource type="Script" uid="uid://cdlt1la4m1h72" path="res://src/ScoreController.cs" id="1_n8qy0"]
+[ext_resource type="Script" uid="uid://cdlt1la4m1h72" path="res://src/Levels/ScoreController.cs" id="1_n8qy0"]
 
 [node name="ScoreController" type="Node" node_paths=PackedStringArray("_scoreLabel", "_timeLabel")]
 script = ExtResource("1_n8qy0")

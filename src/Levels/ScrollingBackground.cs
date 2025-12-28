@@ -5,7 +5,7 @@ public partial class ScrollingBackground : Node2D
     [Export]
     private bool _enabled = true;
 
-    public static int ScrollSpeed { get; private set; } = 800;
+    public int ScrollSpeed { get; private set; } = 800;
 
     // TODO: Currently unnecessary
     [ExportCategory("Components")]
@@ -20,6 +20,13 @@ public partial class ScrollingBackground : Node2D
     private int _dyingTimeSeconds = 3;
 
     private Viewport _viewport;
+
+    public static ScrollingBackground Instance;
+
+    public override void _EnterTree()
+    {
+        Instance = this;
+    }
 
     public override void _Ready()
     {

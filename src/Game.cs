@@ -14,6 +14,7 @@ public partial class Game : Node
         if (Input.IsPhysicalKeyPressed(Key.Quoteleft))
         {
             GetTree().Quit();
+            return;
         }
     }
 }

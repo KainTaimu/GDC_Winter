@@ -1,7 +1,7 @@
-[gd_scene load_steps=23 format=4 uid="uid://dlobvicb23wn8"]
+[gd_scene load_steps=25 format=4 uid="uid://dlobvicb23wn8"]
 
 [ext_resource type="Script" uid="uid://cvbd2iloh02uv" path="res://src/Level.cs" id="1_hlhxn"]
-[ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/ScrollingBackground.cs" id="1_wjax6"]
+[ext_resource type="Script" uid="uid://n2tl8vklul08" path="res://src/Levels/ScrollingBackground.cs" id="1_wjax6"]
 [ext_resource type="Texture2D" uid="uid://bxym02by0gd5h" path="res://assets/grid_dark.png" id="1_y1inj"]
 [ext_resource type="PackedScene" uid="uid://d2bbcd0umajki" path="res://scenes/Player.tscn" id="2_6sk48"]
 [ext_resource type="Script" uid="uid://cntxodvl5atsm" path="res://src/Obstacles/ObstacleManager.cs" id="3_a3ru1"]
@@ -13,7 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://0wrb0pqo4viu" path="res://scenes/PickupPresent.tscn" id="8_1ltef"]
 [ext_resource type="Shader" uid="uid://c7sqd2bx5ckb0" path="res://src/Shaders/fade.gdshader" id="11_1i5ah"]
 [ext_resource type="Texture2D" uid="uid://den8slt08ehuh" path="res://assets/small_chevron.png" id="11_08hre"]
-[ext_resource type="Script" uid="uid://4advel70amkx" path="res://src/SnowController.cs" id="13_wpumy"]
+[ext_resource type="PackedScene" uid="uid://dryud3sn4tl03" path="res://scenes/DeadScreen.tscn" id="11_wxvuj"]
+[ext_resource type="Script" uid="uid://4advel70amkx" path="res://src/Levels/SnowController.cs" id="13_wpumy"]
+[ext_resource type="Script" uid="uid://befhxu6asfwk7" path="res://src/GameWorld.cs" id="16_r6f15"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6sk48"]
 content_margin_left = 0.0
@@ -364,6 +366,9 @@ tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAEAAAAAAAIAAAAAAAI
 tile_set = SubResource("TileSet_keclr")
 metadata/_edit_lock_ = true
 
+[node name="GameWorld" type="Node" parent="."]
+script = ExtResource("16_r6f15")
+
 [node name="ObstacleManager" type="Node" parent="." node_paths=PackedStringArray("_groundSpawnPoint", "_roofSpawnPoint")]
 script = ExtResource("3_a3ru1")
 _obstacleTypes = Dictionary[PackedScene, int]({
@@ -384,6 +389,9 @@ _groundSpawnPoint = NodePath("../Dev/GroundMarker")
 
 [node name="ScoreController" parent="." node_paths=PackedStringArray("_player") instance=ExtResource("7_lkd2y")]
 _player = NodePath("../Player")
+
+[node name="DeadScreen" parent="." instance=ExtResource("11_wxvuj")]
+visible = false
 
 [node name="Player" parent="." instance=ExtResource("2_6sk48")]
 position = Vector2(640, 933)

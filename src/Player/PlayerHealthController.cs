@@ -2,6 +2,9 @@ namespace Game.Players;
 
 public partial class PlayerHealthController : Node
 {
+    [Signal]
+    public delegate void OnPlayerHitEventHandler();
+
     [Export]
     public Stats Stats { get; private set; }
 
@@ -32,7 +35,9 @@ public partial class PlayerHealthController : Node
         {
             Stats.Health -= damage;
         }
+
         DamageFeedback();
+        EmitSignal(SignalName.OnPlayerHit);
     }
 
     private void DamageFeedback()

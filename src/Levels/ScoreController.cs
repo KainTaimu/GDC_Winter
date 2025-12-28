@@ -29,20 +29,9 @@ public partial class ScoreController : Node
 
     public static ScoreController Instance;
 
-    public ScoreController()
-    {
-        if (Instance is not null)
-        {
-            Logger.LogError("Cannot have multiple instances of a singleton!");
-            QueueFree();
-            return;
-        }
-
-        Instance = this;
-    }
-
     public override void _EnterTree()
     {
+        Instance = this;
         AddChild(_timeElapsed);
     }
 

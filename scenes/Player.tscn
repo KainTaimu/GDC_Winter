@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://d2bbcd0umajki"]
+[gd_scene load_steps=30 format=3 uid="uid://d2bbcd0umajki"]
 
 [ext_resource type="Script" uid="uid://cxhk4t1nsfqdj" path="res://src/Player/Player.cs" id="1_p0vlq"]
 [ext_resource type="Script" uid="uid://bgc137qeeq2w3" path="res://src/Player/PlayerInteractionArea.cs" id="2_o4126"]
@@ -10,11 +10,12 @@
 [ext_resource type="Texture2D" uid="uid://v3jmfcjkjivo" path="res://assets/icon.svg" id="4_qu4a1"]
 [ext_resource type="Script" uid="uid://cr6l3ncxh2b2k" path="res://src/Player/StateJumpingOverBox.cs" id="6_khinc"]
 [ext_resource type="Script" uid="uid://dy0jkt7feu81" path="res://src/Player/StateCollidedWithBox.cs" id="7_bruh7"]
-[ext_resource type="Script" uid="uid://bavoprfy5bdby" path="res://src/Player/PlayerInfo.cs" id="7_cw2d6"]
 [ext_resource type="Script" uid="uid://b772txwbwooi6" path="res://src/Player/StateDying.cs" id="8_6eyey"]
 [ext_resource type="Shader" uid="uid://bbwua2g02t0jl" path="res://src/Shaders/flash.gdshader" id="11_lkdrv"]
 [ext_resource type="Script" uid="uid://m44pemv1whga" path="res://src/Player/StateParry.cs" id="11_p7iby"]
 [ext_resource type="Texture2D" uid="uid://bryuim5u8eqi6" path="res://assets/qubit_slip.png" id="14_0rnld"]
+[ext_resource type="Script" uid="uid://ddoyvpe7ebfdr" path="res://src/Player/HealthPopup.cs" id="15_0rnld"]
+[ext_resource type="Texture2D" uid="uid://ry7rreni2un2" path="res://assets/heart.png" id="16_srp4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_70d11"]
 size = Vector2(412, 127.999825)
@@ -188,45 +189,22 @@ material = SubResource("ShaderMaterial_p7iby")
 position = Vector2(0, -64)
 sprite_frames = SubResource("SpriteFrames_70d11")
 
-[node name="Control" type="Control" parent="." node_paths=PackedStringArray("_movementController", "_statController", "_health", "_currentState")]
-layout_mode = 3
-anchors_preset = 7
+[node name="HealthIcons" type="HBoxContainer" parent="." node_paths=PackedStringArray("_healthController")]
+anchors_preset = 8
 anchor_left = 0.5
-anchor_top = 1.0
+anchor_top = 0.5
 anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = -177.33334
-offset_right = 20.0
-offset_bottom = -137.33334
+anchor_bottom = 0.5
+offset_left = -76.0
+offset_top = -170.66667
+offset_right = 76.0
+offset_bottom = -130.66667
 grow_horizontal = 2
-grow_vertical = 0
-script = ExtResource("7_cw2d6")
-_movementController = NodePath("../StateController")
-_statController = NodePath("../HealthController")
-_health = NodePath("VBoxContainer/Health")
-_currentState = NodePath("VBoxContainer/CurrentState")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = -19.0
-offset_top = -23.0
-offset_right = 19.0
-grow_horizontal = 2
-grow_vertical = 0
-alignment = 2
-
-[node name="Health" type="Label" parent="Control/VBoxContainer"]
-layout_mode = 2
-text = "Health: "
-horizontal_alignment = 1
-
-[node name="CurrentState" type="Label" parent="Control/VBoxContainer"]
-layout_mode = 2
-text = "CurrentState: "
-horizontal_alignment = 1
+grow_vertical = 2
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(76, 20)
+size_flags_horizontal = 4
+alignment = 1
+script = ExtResource("15_0rnld")
+_heartTexture = ExtResource("16_srp4u")
+_healthController = NodePath("../HealthController")
