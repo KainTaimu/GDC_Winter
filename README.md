@@ -17,3 +17,5 @@ Credits:
 godot-debug-menu (https://github.com/godot-extended-libraries/godot-debug-menu)
 
 Hue shift shader (https://godotshaders.com/shader/hue-shift/)
+
+List shuffle (https://stackoverflow.com/a/1262619)
