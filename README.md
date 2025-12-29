@@ -11,3 +11,9 @@ Category & Difficulty:
 
 Link to Project: https://github.com/KainTaimu/GDC_Winter
 
+---
+Credits:
+
+godot-debug-menu (https://github.com/godot-extended-libraries/godot-debug-menu)
+
+Hue shift shader (https://godotshaders.com/shader/hue-shift/)
