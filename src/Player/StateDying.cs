@@ -8,7 +8,7 @@ public partial class StateDying : State
     public override void Enter()
     {
         // BUG: WTF
-        // B
+        // Not enough time to figure out how to scale and position the dying sprite correctly
         _sprite.Position = new Vector2(59f, -48f);
         _sprite.Scale = new Vector2(4.9f, 4.8f);
 

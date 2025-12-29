@@ -2,12 +2,19 @@ using System.Collections.Generic;
 
 namespace Game.Obstacles;
 
+/// <summary>
+/// ObstacleManager handles the random obstacles that the player must avoid.
+/// </summary>
 public partial class ObstacleManager : Node
 {
     [ExportCategory("Properties")]
     [Export]
     private bool _enabled = true;
 
+    /// <summary>
+    /// Scenes of the obstacles that randomly spawn. Key of dictionary is the PackedScene of the obstacle
+    /// and value is the amount of that scene is preloaded into the pool
+    /// </summary>
     [ExportCategory("Obstacles")]
     [Export]
     private Godot.Collections.Dictionary<PackedScene, int> _obstacleTypes = []; // Value is amount of scene to preload
@@ -19,13 +26,26 @@ public partial class ObstacleManager : Node
     [Export]
     private float _spawnTimeMax = 1;
 
+    /// <summary>
+    /// The position of this marker is where ground obstacles spawn
+    /// </summary>
     [Export]
     private Node2D _groundSpawnPoint;
 
+    /// <summary>
+    /// The position of this marker is where roof obstacles spawn
+    /// </summary>
     [Export]
     private Node2D _roofSpawnPoint;
 
-    private readonly List<Obstacle> _obstacles = [];
+    /// <summary>
+    /// List of obstacles not currently active and on screen
+    /// </summary>
+    private readonly List<Obstacle> _offObstacles = [];
+
+    /// <summary>
+    /// List of obstacle that are currently active and on screen
+    /// </summary>
     private readonly Queue<Obstacle> _onObstacles = [];
 
     private Timer _spawnTimer = new() { Autostart = true };
@@ -47,28 +67,18 @@ public partial class ObstacleManager : Node
         _spawnTimer.Timeout += SpawnObstacle;
     }
 
-    public override void _Process(double delta)
-    {
-        // if (Engine.GetProcessFrames() % 10 == 0)
-        // {
-        //     Logger.LogDebug($"On", string.Join(", ", _onObstacles));
-        //     Logger.LogDebug($"Off", string.Join(", ", _obstacles));
-        //     Logger.LogDebug(_spawnTimer.WaitTime);
-        // }
-    }
-
     // BUG: Performance issues. Shuffle is O(n) and RemoveAt is O(n) at worse case.
     public void SpawnObstacle()
     {
         if (!_enabled)
             return;
-        if (_obstacles.Count == 0)
+        if (_offObstacles.Count == 0)
             return;
 
-        var idx = GD.RandRange(0, _obstacles.Count - 1);
-        var obstacle = _obstacles[idx];
-        _obstacles.RemoveAt(idx);
-        _obstacles.Shuffle();
+        var idx = GD.RandRange(0, _offObstacles.Count - 1);
+        var obstacle = _offObstacles[idx];
+        _offObstacles.RemoveAt(idx);
+        _offObstacles.Shuffle();
 
         _onObstacles.Enqueue(obstacle);
 
@@ -78,6 +88,9 @@ public partial class ObstacleManager : Node
         _spawnTimer.WaitTime = GD.RandRange(_spawnTimeMin, _spawnTimeMax);
     }
 
+    /// <summary>
+    /// Populates the obstacle pool and sets up the obstacle's initial position, and behaviour when exiting screen
+    /// </summary>
     private void PopulatePool()
     {
         foreach (var (scene, amount) in _obstacleTypes)
@@ -85,6 +98,7 @@ public partial class ObstacleManager : Node
             for (var i = 0; i < amount; i++)
             {
                 var obstacle = scene.Instantiate<Obstacle>();
+                // TODO: Duplicate code with OnExit
                 switch (obstacle.Type)
                 {
                     case ObstacleType.Ground:
@@ -126,10 +140,13 @@ public partial class ObstacleManager : Node
                             break;
                     }
                     _onObstacles.Dequeue();
-                    _obstacles.Add(obstacle);
+                    _offObstacles.Add(obstacle);
                 };
 
+                // Add a unique name to each object
                 obstacle.Name = obstacle.Name + " " + i;
+
+                // Disable the object processing
                 Callable
                     .From(() =>
                     {
@@ -137,7 +154,7 @@ public partial class ObstacleManager : Node
                     })
                     .CallDeferred();
 
-                _obstacles.Add(obstacle);
+                _offObstacles.Add(obstacle);
                 AddChild(obstacle);
             }
         }

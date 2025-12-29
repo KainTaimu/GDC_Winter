@@ -148,7 +148,7 @@ _sprite = NodePath("../AnimatedSprite2D")
 
 [node name="StateController" type="Node" parent="." node_paths=PackedStringArray("_initialState", "_states", "_owner", "_sprite", "_statController")]
 script = ExtResource("3_mdl7e")
-_initialState = NodePath("Grounded")
+_initialState = NodePath("Dying")
 _states = [NodePath("Grounded"), NodePath("JumpingOverBox"), NodePath("CollidedWithBox"), NodePath("Dying"), NodePath("Parry")]
 _owner = NodePath("..")
 _sprite = NodePath("../AnimatedSprite2D")

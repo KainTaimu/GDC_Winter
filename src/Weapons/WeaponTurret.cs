@@ -11,6 +11,10 @@ public partial class WeaponTurret : Weapon
     [Export]
     private Timer _timer;
 
+    /// <summary>
+    /// How far ahead the turret aims to compensate
+    /// </summary>
+    // BUG: Must manually adjust when scroll speed is changed! Use kinematics to dynamically predict?
     private const int FORWARD_COMPENSATION = 600;
 
     public override void _Ready()

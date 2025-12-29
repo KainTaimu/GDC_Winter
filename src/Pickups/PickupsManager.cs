@@ -37,7 +37,7 @@ public partial class PickupsManager : Node
         _spawnTimer.Timeout += SpawnPickup;
     }
 
-    // BUG: Timer is never disabled when _!enabled
+    // TODO: Timer is never disabled when _!enabled. But we check if _enabled anyways.
     public void SpawnPickup()
     {
         if (!_enabled)
